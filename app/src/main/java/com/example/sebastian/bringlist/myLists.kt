@@ -1,5 +1,6 @@
 package com.example.sebastian.bringlist
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_my_lists.*
@@ -18,8 +20,10 @@ import kotlinx.android.synthetic.main.nav_header_my_lists.*
 class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var mDatabase: DatabaseReference? = null
-    private var mMessageReference: DatabaseReference? = null
     private var mAuth: FirebaseAuth? = null
+    private var name: String? = null
+    private var email: String? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +31,6 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(R.layout.activity_my_lists)
         setSupportActionBar(toolbar)
         mDatabase = FirebaseDatabase.getInstance().reference
-        mMessageReference = FirebaseDatabase.getInstance().getReference("Users")
         mAuth = FirebaseAuth.getInstance()
         val userId = mAuth!!.currentUser!!.uid
         mDatabase!!.child("Users").child(userId).child("name").addListenerForSingleValueEvent(object : ValueEventListener {
@@ -35,8 +38,17 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val name = dataSnapshot.getValue(String::class.java)
+                name = dataSnapshot.getValue(String::class.java)
                 tvName.text = name
+            }
+        })
+        mDatabase!!.child("Users").child(userId).child("mail").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                email = dataSnapshot.getValue(String::class.java)
+                tvEmail.text = email
             }
         })
 
@@ -78,8 +90,13 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val newList = Intent(this, newList::class.java)
+        val sp = getSharedPreferences("Test1", Context.MODE_PRIVATE)
+        val editor = sp.edit()
         when (item.itemId) {
             R.id.newList -> {
+                editor.putString("NAME",tvName.text.toString())
+                editor.putString("EMAIL",tvEmail.text.toString())
+                editor.apply()
                 finish()
                 startActivity(newList)
 

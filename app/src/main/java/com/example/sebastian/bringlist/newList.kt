@@ -1,5 +1,6 @@
 package com.example.sebastian.bringlist
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -9,8 +10,12 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_new_list.*
 import kotlinx.android.synthetic.main.app_bar_new_list.*
+import kotlinx.android.synthetic.main.nav_header_my_lists.*
+import kotlinx.android.synthetic.main.nav_header_new_list.*
 
 class newList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -18,6 +23,10 @@ class newList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_list)
         setSupportActionBar(toolbar)
+
+        val spExtraer = getSharedPreferences("Test1", Context.MODE_PRIVATE)
+        val nombre = spExtraer.getString("NAME","")
+        val email = spExtraer.getString("EMAIL","")
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
