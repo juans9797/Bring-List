@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "121026249768",
+    "firebase_url": "https://moviles-ed605.firebaseio.com",
+    "project_id": "moviles-ed605",
+    "storage_bucket": "moviles-ed605.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121026249768:android:058739fb413f008d",
+        "android_client_info": {
+          "package_name": "com.example.sebastian.bringlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121026249768-nb80f4mhmp0dpd412t2mg4v8scaghl5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sebastian.bringlist",
+            "certificate_hash": "09bad30c88e77b12d90f55255d389f7d9d4a39ad"
+          }
+        },
+        {
+          "client_id": "121026249768-t09loo1ake77ct653nmr264pug7ha3d7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3prjULpvhozYKBT04ocUmIdHztArbzvI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121026249768-t09loo1ake77ct653nmr264pug7ha3d7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
