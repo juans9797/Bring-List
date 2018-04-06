@@ -1,32 +1,52 @@
 package com.example.sebastian.bringlist
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_new_list.*
 import kotlinx.android.synthetic.main.app_bar_new_list.*
-import kotlinx.android.synthetic.main.nav_header_my_lists.*
 import kotlinx.android.synthetic.main.nav_header_new_list.*
 
 class newList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private var mDatabase: DatabaseReference? = null
+    private var mAuth: FirebaseAuth? = null
+    private var name: String? = null
+    private var email: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_list)
         setSupportActionBar(toolbar)
 
-        val spExtraer = getSharedPreferences("Test1", Context.MODE_PRIVATE)
-        val nombre = spExtraer.getString("NAME","")
-        val email = spExtraer.getString("EMAIL","")
+        mDatabase = FirebaseDatabase.getInstance().reference
+        mAuth = FirebaseAuth.getInstance()
+        val userId = mAuth!!.currentUser!!.uid
+        mDatabase!!.child("Users").child(userId).child("name").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                name = dataSnapshot.getValue(String::class.java)
+                tvNombre.text = name
+            }
+        })
+        mDatabase!!.child("Users").child(userId).child("mail").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                email = dataSnapshot.getValue(String::class.java)
+                tvCorreo.text = email
+            }
+        })
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)

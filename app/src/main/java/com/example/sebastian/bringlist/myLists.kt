@@ -3,14 +3,12 @@ package com.example.sebastian.bringlist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_my_lists.*
@@ -90,13 +88,8 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val newList = Intent(this, newList::class.java)
-        val sp = getSharedPreferences("Test1", Context.MODE_PRIVATE)
-        val editor = sp.edit()
         when (item.itemId) {
             R.id.newList -> {
-                editor.putString("NAME",tvName.text.toString())
-                editor.putString("EMAIL",tvEmail.text.toString())
-                editor.apply()
                 finish()
                 startActivity(newList)
 
