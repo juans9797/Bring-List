@@ -1,5 +1,6 @@
 package com.example.sebastian.bringlist
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -8,18 +9,24 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_new_list.*
 import kotlinx.android.synthetic.main.app_bar_new_list.*
+import kotlinx.android.synthetic.main.content_new_list.*
 import kotlinx.android.synthetic.main.nav_header_new_list.*
 
 class newList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var mDatabase: DatabaseReference? = null
+    private var mDatabase1: FirebaseDatabase? = null
+    private var mDatabaseReference: DatabaseReference? = null
     private var mAuth: FirebaseAuth? = null
     private var name: String? = null
     private var email: String? = null
+    private var consecutivo: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +54,39 @@ class newList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
                 tvCorreo.text = email
             }
         })
+        mDatabase!!.child("Consec").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
+            }
 
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                consecutivo = dataSnapshot.getValue(String::class.java)
+                tvIdList.text = consecutivo
+
+            }
+        })
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val btn_click_me = findViewById<Button>(R.id.button6) as Button
+        val vrName=findViewById<EditText>(R.id.etListName)
+        mDatabase1 = FirebaseDatabase.getInstance()
+        mDatabaseReference = mDatabase1!!.reference.child("Lists")
+        btn_click_me.setOnClickListener{
+            val currentUserDb = mDatabaseReference!!.child(tvIdList.text.toString())
+            currentUserDb.child("name").setValue(vrName.text.toString())
+            var consec = tvIdList.text.toString()
+            val newCon = consec.toInt() + 1
+            mDatabaseReference = mDatabase1!!.reference
+            val currentUserDb1 = mDatabaseReference
+            currentUserDb1!!.child("Consec").setValue(newCon.toString())
+
+            // -------------------- HAY QUE ADICIONAR FIN DE LA ACTIVIDAD Y LA APARTURA DE LA NUEVA ACTIVIDAD------------------------
+
+        }
     }
 
     override fun onBackPressed() {
