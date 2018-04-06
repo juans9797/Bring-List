@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_my_lists.*
@@ -60,6 +61,12 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        val Example = Intent(this, home::class.java)
+        val btn_click_me = findViewById<Button>(R.id.btnEjemplo) as Button
+        btn_click_me.setOnClickListener{
+            finish()
+            startActivity(Example)
+        }
     }
 
     override fun onBackPressed() {
