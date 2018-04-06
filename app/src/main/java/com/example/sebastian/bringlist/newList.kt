@@ -73,6 +73,7 @@ class newList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
 
         val btn_click_me = findViewById<Button>(R.id.button6) as Button
         val vrName=findViewById<EditText>(R.id.etListName)
+        val myList = Intent(this, myLists::class.java)
         mDatabase1 = FirebaseDatabase.getInstance()
         mDatabaseReference = mDatabase1!!.reference.child("Lists")
         btn_click_me.setOnClickListener{
@@ -83,8 +84,9 @@ class newList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
             mDatabaseReference = mDatabase1!!.reference
             val currentUserDb1 = mDatabaseReference
             currentUserDb1!!.child("Consec").setValue(newCon.toString())
+            finish()
+            startActivity(myList)
 
-            // -------------------- HAY QUE ADICIONAR FIN DE LA ACTIVIDAD Y LA APARTURA DE LA NUEVA ACTIVIDAD------------------------
 
         }
     }

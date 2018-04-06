@@ -10,6 +10,12 @@
         <item
             android:id="@+id/newList"
             android:title="New List" />
+        <item
+            android:id="@+id/itemsOnList"
+            android:title="Items on List" />
+        <item
+            android:id="@+id/location"
+            android:title="Location" />
     </group>
 
 </menu>
