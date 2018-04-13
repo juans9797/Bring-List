@@ -9,7 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_my_lists.*
@@ -22,7 +24,6 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
     private var mAuth: FirebaseAuth? = null
     private var name: String? = null
     private var email: String? = null
-
 
 
 
@@ -52,6 +53,14 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
             }
         })
 
+        val listView = findViewById<ListView>(R.id.listListView)
+        val listItems = arrayOfNulls<String>(2)
+        listItems[0]="Asado Nicolas"
+        listItems[1]="Reunion donde Maria"
+        val adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,listItems)
+        listView.adapter = adapter
+        val Example = Intent(this, home::class.java)
+
 
 
 
@@ -61,12 +70,6 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-        val Example = Intent(this, home::class.java)
-        val btn_click_me = findViewById<Button>(R.id.btnEjemplo) as Button
-        btn_click_me.setOnClickListener{
-            finish()
-            startActivity(Example)
-        }
     }
 
     override fun onBackPressed() {
