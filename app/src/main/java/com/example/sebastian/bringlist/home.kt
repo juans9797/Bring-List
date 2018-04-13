@@ -72,7 +72,7 @@ class home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         // Handle navigation view item clicks here.
         val newList = Intent(this,newList::class.java)
         val myList = Intent(this,myLists::class.java)
-        val location = Intent(this,location::class.java)
+        val location = Intent(this,location1::class.java)
         when (item.itemId) {
             R.id.newList -> {
                 finish()
