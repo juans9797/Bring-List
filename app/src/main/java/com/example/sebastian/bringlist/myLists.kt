@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
@@ -60,7 +61,7 @@ class myLists : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         val adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,listItems)
         listView.adapter = adapter
         val Example = Intent(this, home::class.java)
-
+        listView.setOnItemClickListener { _, _, _, _ -> finish();startActivity(Example) }
 
 
 
