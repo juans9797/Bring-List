@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -22,6 +24,16 @@ class home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
+
+        val listView = findViewById<ListView>(R.id.homeListView)
+        val listItems = arrayOfNulls<String>(3)
+        listItems[0]="Carne"
+        listItems[1]="Papa"
+        listItems[2]="Gaseosa"
+        val adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,listItems)
+        listView.adapter = adapter
+        val Example = Intent(this, home::class.java)
+        listView.setOnItemClickListener { _, _, _, _ -> finish();startActivity(Example) }
 
 
         val toggle = ActionBarDrawerToggle(
