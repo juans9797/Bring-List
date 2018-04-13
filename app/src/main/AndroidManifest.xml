@@ -32,6 +32,10 @@
         <activity
             android:name=".myLists"
             android:label="@string/title_activity_my_lists"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".location"
+            android:label="@string/title_activity_location"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
