@@ -1,11 +1,10 @@
 package com.example.sebastian.bringlist
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -23,7 +22,7 @@ class SignUp : AppCompatActivity() {
         mDatabaseReference = mDatabase!!.reference!!.child("Users")
         mAuth = FirebaseAuth.getInstance()
         val btn_signUp = findViewById<Button>(R.id.button4) as Button
-        val btn_clear = findViewById<Button>(R.id.button5) as Button
+        //val btn_clear = findViewById<Button>(R.id.button5) as Button
         val vrName=findViewById<EditText>(R.id.editText4)
         val vrMail=findViewById<EditText>(R.id.editText5)
         val vrPassword=findViewById<EditText>(R.id.editText6)
